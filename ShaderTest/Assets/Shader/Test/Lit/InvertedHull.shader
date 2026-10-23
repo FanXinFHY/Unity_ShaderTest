@@ -11,7 +11,7 @@ Shader "Custom/InvertedHull"
         _ShadowSmoothness("Shadow Smoothness",Range(0.001,0.1)) = 0.01
 
         _OutLineColor("Outline Color",Color) = (0,0,0,1)//√Ë±ﬂ—’…´
-        _OutlineWidth("Outline Width",Range(0,0.1)) = 0.01//√Ë±ﬂ¥÷œ∏
+        _OutLineWidth("Outline Width",Range(0,0.1)) = 0.01//√Ë±ﬂ¥÷œ∏
     }
 
     SubShader
@@ -132,8 +132,8 @@ Shader "Custom/InvertedHull"
                 half4 _ShadowColor;
                 float _ShadowThreshold;
                 float _ShadowSmoothness;
-                half4 _OutlineColor;  
-                float _OutlineWidth;
+                half4 _OutLineColor;  
+                float _OutLineWidth;
             CBUFFER_END
 
             Varyings vert(Attributes IN)
@@ -141,14 +141,14 @@ Shader "Custom/InvertedHull"
                 Varyings OUT;
 
                 float3 positionOS = IN.positionOS.xyz;
-                positionOS += normalize(IN.normalOS) * _OutlineWidth;
+                positionOS += normalize(IN.normalOS) * _OutLineWidth;
                 OUT.positionCS = TransformObjectToHClip(positionOS);
                 return OUT;
             }
 
             half4 frag(Varyings IN) : SV_Target
             {
-                return _OutlineColor;
+                return _OutLineColor;
             }
             ENDHLSL
         }
